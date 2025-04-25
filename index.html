@@ -5,7 +5,7 @@
   <title>AI asistentka pro individuální plán</title>
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 16px;
       line-height: 1.5;
       padding: 20px;
@@ -17,9 +17,7 @@
       border: 1px solid #ccc;
       padding: 10px;
       resize: vertical;
-      font-family: inherit;
-      font-size: inherit;
-      line-height: inherit;
+      font: inherit;
     }
     button {
       background: #e76a58;
@@ -31,13 +29,13 @@
       border-radius: 999px;
       font-size: 1rem;
     }
-    #result {
-      margin-top: 20px;
-    }
+    #result { margin-top: 20px; }
   </style>
 </head>
 <body>
-  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny: co klient zvládne sám a jakou pomoc potřebuje. Naše AI asistentka vám PORADÍ, co do textu doplnit a pomůže vylepšit formulaci. Hotový text můžete kopírovat do plánu klienta."></textarea><br>
+  <textarea id="editor"
+    placeholder="Zde napište text…">
+  </textarea><br>
 
   <button id="btnAdvice">Poradit</button>
   <button id="btnImprove">Vylepšit</button>
@@ -49,16 +47,14 @@
   <script>
     const editor = document.getElementById('editor');
     const result = document.getElementById('result');
-    const btnUndo = document.getElementById('btnUndo');
-    const btnCopy = document.getElementById('btnCopy');
     let beforeImprove = '';
 
-    // Poradit: stream s HTML vkládáním přes insertAdjacentHTML
+    // 1) Stream poradit
     document.getElementById('btnAdvice').onclick = async () => {
       const text = editor.value.trim();
       if (!text) return alert('Napiš nejdřív text.');
-
       result.innerHTML = '<b>Moment, přemýšlím…</b>';
+
       const res = await fetch('/api/advice', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -69,28 +65,25 @@
         return;
       }
 
-      result.innerHTML = '';
+      result.innerHTML = '';  // vyčistit
       const reader = res.body.getReader();
       const decoder = new TextDecoder('utf-8');
-      const parser = new DOMParser();
 
+      //  important: insertAdjacentHTML místo innerHTML+=parser!
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
         const chunk = decoder.decode(value, { stream: true });
-        // parse partial HTML and append
-        const doc = parser.parseFromString(chunk, 'text/html');
-        result.insertAdjacentHTML('beforeend', doc.body.innerHTML);
+        result.insertAdjacentHTML('beforeend', chunk);
       }
     };
 
-    // Vylepšit: jednorázové přepsání editoru
+    // 2) Jednorázové vylepšit
     document.getElementById('btnImprove').onclick = async () => {
       const text = editor.value.trim();
       if (!text) return alert('Napiš nejdřív text.');
-
       beforeImprove = text;
-      btnUndo.disabled = false;
+      document.getElementById('btnUndo').disabled = false;
       result.innerHTML = '<b>Moment, přemýšlím…</b>';
 
       const res = await fetch('/api/improve', {
@@ -103,23 +96,27 @@
       result.innerHTML = '';
     };
 
-    btnUndo.onclick = () => {
+    // 3) Zpět
+    document.getElementById('btnUndo').onclick = () => {
       editor.value = beforeImprove;
       result.innerHTML = '';
-      btnUndo.disabled = true;
+      document.getElementById('btnUndo').disabled = true;
     };
 
-    btnCopy.onclick = () => {
+    // 4) Kopírovat
+    document.getElementById('btnCopy').onclick = () => {
       const t = editor.value.trim();
       if (!t) return;
       navigator.clipboard.writeText(t)
         .then(() => {
-          btnCopy.textContent = 'Zkopírováno ✓';
-          setTimeout(() => btnCopy.textContent = 'Kopírovat', 2000);
+          const b = document.getElementById('btnCopy');
+          b.textContent = 'Zkopírováno ✓';
+          setTimeout(() => b.textContent = 'Kopírovat', 2000);
         })
         .catch(() => {
-          btnCopy.textContent = 'Chyba při kopírování';
-          setTimeout(() => btnCopy.textContent = 'Kopírovat', 2000);
+          const b = document.getElementById('btnCopy');
+          b.textContent = 'Chyba při kopírování';
+          setTimeout(() => b.textContent = 'Kopírovat', 2000);
         });
     };
   </script>
