@@ -2,6 +2,7 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
+  <title>AI asistentka pro individuální plán</title>
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont,
@@ -52,79 +53,74 @@
   <script>
     const editor = document.getElementById('editor');
     const result = document.getElementById('result');
+    const btnCopy = document.getElementById('btnCopy');
+    const btnUndo = document.getElementById('btnUndo');
+    const btnAdvice = document.getElementById('btnAdvice');
+    const btnImprove = document.getElementById('btnImprove');
     let beforeImprove = '';
 
-    async function streamApi(path, payload) {
-      result.innerHTML = '';
-      const res = await fetch(path, {
+    async function fetchStream(path, payload) {
+      result.innerHTML = "<b>Moment, přemýšlím…</b>";
+      const response = await fetch(path, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
-      if (!res.ok || !res.body) {
+      if (!response.ok || !response.body) {
         result.innerHTML = 'Chyba při načítání odpovědi.';
         return;
       }
 
-      const reader = res.body.getReader();
+      result.innerHTML = '';
+      const reader = response.body.getReader();
       const decoder = new TextDecoder('utf-8');
-      let buffer = '';
+      let fullText = '';
 
       while (true) {
-        const { value, done } = await reader.read();
+        const { done, value } = await reader.read();
         if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-
-        // odstranění markdownového ohraničení a update obsahu
-        let cleaned = buffer.replace(/```html\s*/g, '').replace(/```/g, '');
-        result.innerHTML = cleaned;
+        const chunk = decoder.decode(value, { stream: true });
+        result.innerHTML += chunk;
+        fullText += chunk;
       }
+
+      return fullText;
     }
 
-    async function callApi(path, payload) {
-      result.innerHTML = '<b>Moment, přemýšlím…</b>';
-      const res = await fetch(path, {
-        method: 'POST',
-        headers: { 'Content-Type':'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      return data.text;
-    }
-
-    document.getElementById('btnAdvice').onclick = async () => {
+    btnAdvice.onclick = async () => {
       const text = editor.value.trim();
       if (!text) return alert('Napiš nejdřív text.');
-      streamApi('/api/advice', { text });
+      await fetchStream('/api/advice', { text });
     };
 
-    document.getElementById('btnImprove').onclick = async () => {
+    btnImprove.onclick = async () => {
       const text = editor.value.trim();
       if (!text) return alert('Napiš nejdřív text.');
       beforeImprove = text;
-      document.getElementById('btnUndo').disabled = false;
-      const improved = await callApi('/api/improve', { text });
-      editor.value = improved;
-      result.innerHTML = '';
+      btnUndo.disabled = false;
+      const improved = await fetchStream('/api/improve', { text });
+      if (improved) {
+        editor.value = improved;
+        result.innerHTML = '';
+      }
     };
 
-    document.getElementById('btnUndo').onclick = () => {
+    btnUndo.onclick = () => {
       editor.value = beforeImprove;
       result.innerHTML = '';
-      document.getElementById('btnUndo').disabled = true;
+      btnUndo.disabled = true;
     };
 
-    const btnCopy = document.getElementById('btnCopy');
     btnCopy.onclick = () => {
       const text = editor.value.trim();
       if (!text) return;
       navigator.clipboard.writeText(text).then(() => {
         btnCopy.textContent = 'Zkopírováno ✓';
-        setTimeout(() => { btnCopy.textContent = 'Kopírovat'; }, 2000);
+        setTimeout(() => (btnCopy.textContent = 'Kopírovat'), 2000);
       }).catch(() => {
         btnCopy.textContent = 'Chyba při kopírování';
-        setTimeout(() => { btnCopy.textContent = 'Kopírovat'; }, 2000);
+        setTimeout(() => (btnCopy.textContent = 'Kopírovat'), 2000);
       });
     };
   </script>
