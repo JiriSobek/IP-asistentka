@@ -70,17 +70,26 @@
       const decoder = new TextDecoder();
       let done = false;
       let fullText = '';
+      let started = false;
 
-      result.innerHTML = ''; // vyčisti výstup před streamováním
+      result.innerHTML = ''; // začátek streamu
 
       while (!done) {
         const { value, done: doneReading } = await reader.read();
         done = doneReading;
         if (value) {
-          const chunk = decoder.decode(value, { stream: true });
-          const cleaned = chunk.replace(/```html\s*|```/g, '');
-          fullText += cleaned;
-          result.innerHTML += cleaned;
+          let chunk = decoder.decode(value, { stream: true });
+
+          // Zahazuj začátek kódu (```html nebo ```), jen jednou
+          if (!started) {
+            chunk = chunk.replace(/^```html\s*/i, '');
+            started = true;
+          }
+          // Odstraň koncové ```
+          chunk = chunk.replace(/```$/, '');
+
+          fullText += chunk;
+          result.innerHTML += chunk;
         }
       }
 
