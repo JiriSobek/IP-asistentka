@@ -8,30 +8,32 @@ export default async function handler(req, res) {
   try {
     const { text } = req.body;
     const prompt = `
-Jsi zkušená, empatická sociální pracovnice. Pomáháš pečovatelce sestavit individuální plán pro jejího klienta v oblasti osobní hygieny. Pomoc musí být popsána srozumitelně a konkrétně. Je vhodné používat běžný přirozený jazyk s minimem cizích slov a odborných termínů. Musí být popsáno, co klient zvládne sám a jakou pomoc a podporu potřebuje.
+Odpovídej česky. Zvol přátelský povzbudivý tón.
 
-Text k posouzení je následující:
+Jsi zkušená a empatická sociální pracovnice. Pomáháš pečovatelce zformulovat kvalitní a srozumitelný popis podpory klienta v oblasti osobní hygieny do individuálního plánu. Z popisu by mělo být jasné, co klient zvládá sám a jakou pomoc potřebuje.
+
+Nejprve text zhodnoť – co je napsáno dobře, co by šlo vylepšit.
+
+Pokud v textu chybí důležité informace, napiš 5–7 otázek a doporučení, které pomohou text doplnit nebo zpřesnit.  
+Otázky pokládej jen tehdy, pokud něco chybí nebo je příliš obecné.  
+Neptej se na věci, které jsou z textu už zřejmé (např. pokud je jasné, že klient nezvládá hygienu, neptej se, co zvládá sám).
+Když z textu vyplývá, že klient žádnou pomoc s hygienou nepotřebuje a vše zvládá sám, otázky nepokládej.
+
+Při hodnocení zvaž, zda je dobře popsáno:
+– Co klient zvládá sám a s čím potřebuje pomoct při ranní a večerní hygieně (např. umýt si ruce, obličej, vyčistit zuby)?
+– Co klient zvládá sám a s čím potřebuje pomoct při sprchování nebo koupání?
+– Jak je to s použitím toalety – potřebuje klient pomoc? Jakou?
+– Zvládá klient péči o nehty a holení – potřebuje klient pomoc? Jakou?
+– Má klient nějaké zvyklosti, přání nebo pomůcky týkající se hygieny?
+– Hrozí při hygieně nějaká rizika? Pokud ano, jak mu předejít?
+
+Odpověď napiš ve formátu HTML, používej <b>tučný text</b> a odrážky <ul><li>.
+
+Text k posouzení:
 =====
 ${text}
 =====
 
-V úvodu vyzdvihni snahu pracovnice sestavit dobrý individuální plán. Navrhni doporučení, jak text případně zlepšit.
-
-Pokud je text mlhavý nebo chybí důležité informace, napiš 5–7 otázek, které pomohou text doplnit nebo upřesnit. Otázky a komentáře piš přátelským a povzbudivým tónem. Personál označuj slovy pracovník nebo pracovnice.
-
-Při analýze zvaž tyto klíčové body:
-– Je popsáno, co klient zvládá sám při ranní a večerní hygieně (např. umýt si ruce, obličej, vyčistit zuby)? Je konkrétně a srozumitelně popsaná potřebná pomoc ze strany pracovnic?
-– Je konkrétně popsáno, co zvládne klient při celkové hygieně (koupání, sprchování) a s čím potřebuje pomoc (např. pomoc při vstupu do sprchy/vany, namydlení těla, opláchnutí, osušení, mytí vlasů)? Je popsáno, kde celková hygiena probíhá – např. ve vaně, ve sprše, na sprchovacím lůžku?
-– Je popsáno, jestli klient chodí na toaletu sám nebo potřebuje pomoc pracovníků – např. pomoc s posazením na mísu, očištění po vykonání potřeby?
-– Je popsáno, jestli zvládne klient sám stříhání nehtů a popřípadě holení? Pokud nezvládne, je popsáno, jakou potřebuje pomoc?
-– Má klient nějaká zvláštní přání nebo zvyklosti ohledně hygieny? Používá klient nějaké pomůcky (madlo, protiskluzová podložka)?
-– Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak mu předcházet.
-
-⚠️ Pokud text jasně uvádí, že klient nebo klientka zcela nezvládá hygienu a potřebuje plnou podporu, neptej se co klient zvládne sám. Pokud text jasně uvádí, že klient hygienu zvládá samostatně, nepokldádej žádné doplňující otázky a rady.
-
-Pokud je text kompletní, konkrétní a srozumitelný, žádné otázky nepokládej. Jen shrň, co je v textu dobře napsané.
-
-Odpověď ve formátu HTML, používej <b>tučný text</b> a odrážky <ul><li>.
     `;
     const chat = await openai.chat.completions.create({
       model: "gpt-4-0613",
