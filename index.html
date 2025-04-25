@@ -6,7 +6,7 @@
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont,
                    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      font-size: 16px;            /* nebo 1rem, pokud ti to vyhovuje */
+      font-size: 16px;
       line-height: 1.5;
       padding: 20px;
     }
@@ -18,8 +18,6 @@
       border: 1px solid #ccc;
       padding: 10px;
       resize: vertical;
-
-      /* přidáno: dědění fontu a velikosti z body */
       font-family: inherit;
       font-size: inherit;
       line-height: inherit;
@@ -38,13 +36,10 @@
 
     #result {
       margin-top: 20px;
-      /* pokud v #result potřebuješ nějak jiný řádkování nebo barvu, můžeš sem přidat */
     }
   </style>
 </head>
 <body>
-  <!-- nad textovým polem už žádný <h1> -->
-
   <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny: co klient zvládne sám a jakou pomoc potřebuje. Naše AI asistentka vám PORADÍ, co do textu doplnit a pomůže vám VYLEPŠIT formulaci. Hotový text můžete KOPÍROVAT do plánu klienta."></textarea><br>
 
   <button id="btnAdvice">Poradit</button>
@@ -93,10 +88,23 @@
       document.getElementById('btnUndo').disabled = true;
     };
 
-    document.getElementById('btnCopy').onclick = () => {
-      navigator.clipboard.writeText(editor.value)
-        .then(() => alert('Zkopírováno!'))
-        .catch(() => alert('Nepodařilo se kopírovat.'));
+    // ✅ Nová funkce pro tlačítko "Kopírovat"
+    const btnCopy = document.getElementById('btnCopy');
+    btnCopy.onclick = () => {
+      const text = editor.value.trim();
+      if (!text) return;
+
+      navigator.clipboard.writeText(text).then(() => {
+        btnCopy.textContent = 'Zkopírováno ✓';
+        setTimeout(() => {
+          btnCopy.textContent = 'Kopírovat';
+        }, 2000);
+      }).catch(() => {
+        btnCopy.textContent = 'Chyba při kopírování';
+        setTimeout(() => {
+          btnCopy.textContent = 'Kopírovat';
+        }, 2000);
+      });
     };
   </script>
 </body>
