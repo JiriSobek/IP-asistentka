@@ -32,7 +32,7 @@ Pokud něco důležitého chybí nebo je popis příliš obecný, napiš několi
 Pokud z textu plyne, že klient je zcela závislý na pomoci pracovnic, neptej se, co klient zvládá.
 Pokud klient něco zvládá zcela sám (například ranní hygienu), žádné doplňující otázky nepokládej.
 Pokud je v textu posouzení řeč o klientovi - muži, piš o něm v mužském rodě. Pokud je zmíněna klientka - žena, piš o ní v ženském rodě.
-Piš odpovědi v délce maximálně 1600 znaků. Nakonec textu nepiš pozdrav, ale napiš, že jsi tu k dispozici pro další rady.
+Piš odpovědi v délce maximálně 1600 znaků. Nakonec textu nepiš pozdrav, ale napiš, že jsi tu ochotně k dispozici pro další rady.
 
 Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
 `;
