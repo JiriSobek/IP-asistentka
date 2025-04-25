@@ -26,11 +26,11 @@ Dobrý individuální plán jasně a srozumitelně popisuje, co klient zvládá 
 3. Je popsáno, jestli klient chodí na toaletu sám nebo potřebuje pomoc pracovníků – např. pomoc s posazením na mísu, očištění po vykonání potřeby?
 4. Je popsáno, jestli zvládne klient sám stříhání nehtů? Pokud nezvládne, je popsáno, jakou potřebuje pomoc? 
 5. Má klient nějaká zvláštní přání nebo zvyklosti ohledně hygieny? Používá klient nějaké pomůcky (madlo, protiskluzová podložka)? 
-6. Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak mu předcházet.
+6. Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak riziku předcházet.
 
-Pokud něco důležitého chybí nebo je příliš obecné, napiš 5 otázek, které pomohou text doplnit a upřesnit.
+Pokud něco důležitého chybí nebo je popis příliš obecný, napiš několik otázek, které pomohou text doplnit a upřesnit.
 Pokud z textu plyne, že klient je zcela závislý na pomoci pracovnic, neptej se, co klient zvládá.
-Pokud klient něco zvládá sám (například ranní hygienu), žádné doplňující otázky nepokládej.
+Pokud klient něco zvládá zcela sám (například ranní hygienu), žádné doplňující otázky nepokládej.
 Piš odpovědi v délce maximálně 1600 znaků.
 
 Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
