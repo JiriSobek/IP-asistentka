@@ -36,7 +36,7 @@ Piš odpovědi v délce maximálně 1600 znaků.
 Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
 `;
 
-    const stream = await openai.chat.completions.create({
+    const stream = await openai.beta.chat.completions.stream({
       model: "gpt-4-0125-preview",
       stream: true,
       messages: [
