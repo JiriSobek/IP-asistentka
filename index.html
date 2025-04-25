@@ -53,7 +53,6 @@
     const result = document.getElementById('result');
     let beforeImprove = '';
 
-    // ✅ Nová verze callApi pro streamování
     async function callApi(path, payload) {
       result.innerHTML = '<b>Moment, přemýšlím…</b>';
       const res = await fetch(path, {
@@ -72,15 +71,16 @@
       let done = false;
       let fullText = '';
 
-      result.innerHTML = ''; // Vyčisti "Moment, přemýšlím…" před začátkem streamu
+      result.innerHTML = ''; // vyčisti výstup před streamováním
 
       while (!done) {
         const { value, done: doneReading } = await reader.read();
         done = doneReading;
         if (value) {
           const chunk = decoder.decode(value, { stream: true });
-          fullText += chunk;
-          result.innerHTML += chunk;
+          const cleaned = chunk.replace(/```html\s*|```/g, '');
+          fullText += cleaned;
+          result.innerHTML += cleaned;
         }
       }
 
@@ -129,4 +129,3 @@
   </script>
 </body>
 </html>
-
