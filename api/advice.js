@@ -19,35 +19,49 @@ Text k posouzení:
 =====
 ${text}
 =====
-V odpovědi nejprve oceň snahu pracovnice. Zvaž přehlednost, konkrétnost a srozumitelnost. Pokud něco chybí, napiš 5–7 doplňujících otázek.
-Odpověď napiš **jako čistý HTML fragment** (bez zpětných apostrofů a bez <html>/<body> wrapperu), používej <b>tučný text</b> a odrážky <ul><li>, maximálně 1600 znaků.
-`;
+V odpovědi nejprve oceň snahu pracovnice při vytváření individuálního plánu.
+Dobrý individuální plán jasně a srozumitelně popisuje, co klient zvládá sám a s čím potřebuje pomoc. Popisuje, jak konkrétně tato pomoc probíhá. Zvaž tyto klíčové body: 
+1. Je popsáno, co klient zvládá sám při ranní a večerní hygieně (např. umýt si ruce, obličej, vyčistit zuby)? Je konkrétně popsaná potřebná pomoc ze strany pracovnic?
+2. Je konkrétně popsáno, co zvládne klient při celkové hygieně (koupání, sprchování) a s čím potřebuje pomoc (např. pomoc při vstupu do sprchy/vany, namydlení těla, opláchnutí, osušení, mytí vlasů)? 
+3. Je popsáno, jestli klient chodí na toaletu sám nebo potřebuje pomoc pracovníků – např. pomoc s posazením na mísu, očištění po vykonání potřeby?
+4. Je popsáno, jestli zvládne klient sám stříhání nehtů? Pokud nezvládne, je popsáno, jakou potřebuje pomoc? 
+5. Má klient nějaká zvláštní přání nebo zvyklosti ohledně hygieny? Používá klient nějaké pomůcky (madlo, protiskluzová podložka)? 
+6. Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak mu předcházet.
 
-    // SSE streamování
-    res.setHeader("Content-Type", "text/event-stream");
-    res.setHeader("Cache-Control", "no-cache");
-    res.setHeader("Connection", "keep-alive");
+Pokud něco důležitého chybí nebo je příliš obecné, napiš 5 otázek, které pomohou text doplnit a upřesnit.
+Pokud z textu plyne, že klient je zcela závislý na pomoci pracovnic, neptej se, co klient zvládá.
+Pokud klient něco zvládá sám (například ranní hygienu), žádné doplňující otázky nepokládej.
+Piš odpovědi v délce maximálně 1600 znaků.
+
+Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
+`;
 
     const stream = await openai.chat.completions.create({
       model: "gpt-4-0125-preview",
       messages: [
         { role: "system", content: systemMessage },
-        { role: "user",   content: userPrompt }
+        { role: "user", content: userPrompt }
       ],
       stream: true
     });
 
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive'
+    });
+
     for await (const chunk of stream) {
-      const delta = chunk.choices[0].delta?.content;
-      if (delta) {
-        // posíláme dílčí HTML přímo na front-end
-        res.write(delta);
+      const content = chunk.choices?.[0]?.delta?.content;
+      if (content) {
+        res.write(content);
       }
     }
-    res.end();
 
+    res.end();
   } catch (err) {
     console.error(err);
-    res.status(500).end("Chyba serveru při volání OpenAI");
+    res.status(500).json({ error: "Chyba serveru při volání OpenAI" });
   }
 }
+
