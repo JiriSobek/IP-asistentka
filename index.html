@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+  <meta charset="UTF-8">
+  <title>AI asistentka pro individuální plán</title>
   <style>
     body {
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       font-size: 16px;
       line-height: 1.5;
       padding: 20px;
@@ -35,51 +37,56 @@
   </style>
 </head>
 <body>
-  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny..."></textarea><br>
+  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny: co klient zvládne sám a jakou pomoc potřebuje. Naše AI asistentka vám PORADÍ, co do textu doplnit a pomůže vylepšit formulaci. Hotový text můžete kopírovat do plánu klienta."></textarea><br>
+
   <button id="btnAdvice">Poradit</button>
   <button id="btnImprove">Vylepšit</button>
   <button id="btnUndo" disabled>Zpět</button>
   <button id="btnCopy">Kopírovat</button>
+
   <div id="result"></div>
 
   <script>
     const editor = document.getElementById('editor');
     const result = document.getElementById('result');
+    const btnUndo = document.getElementById('btnUndo');
+    const btnCopy = document.getElementById('btnCopy');
     let beforeImprove = '';
 
-    // STREAMUJÍCÍ FUNKCE PRO TLAČÍTKO PORADIT
+    // Poradit: stream a HTML formátování
     document.getElementById('btnAdvice').onclick = async () => {
       const text = editor.value.trim();
       if (!text) return alert('Napiš nejdřív text.');
 
       result.innerHTML = '<b>Moment, přemýšlím…</b>';
-      const response = await fetch('/api/advice', {
+      const res = await fetch('/api/advice', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text })
       });
-
-      if (!response.ok) {
-        result.innerHTML = '<b>Chyba při volání API.</b>';
+      if (!res.ok || !res.body) {
+        result.innerHTML = '<b>Chyba při načítání odpovědi.</b>';
         return;
       }
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder('utf-8');
       result.innerHTML = '';
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder('utf-8');
       while (true) {
-        const { value, done } = await reader.read();
+        const { done, value } = await reader.read();
         if (done) break;
-        result.innerHTML += decoder.decode(value, { stream: true });
+        const chunk = decoder.decode(value, { stream: true });
+        result.innerHTML += chunk;
       }
     };
 
-    // FUNKCE PRO TLAČÍTKO VYLEPŠIT (NESTREAMUJE)
+    // Vylepšit: jednorázové přepsání editoru
     document.getElementById('btnImprove').onclick = async () => {
       const text = editor.value.trim();
       if (!text) return alert('Napiš nejdřív text.');
+
       beforeImprove = text;
-      document.getElementById('btnUndo').disabled = false;
+      btnUndo.disabled = false;
       result.innerHTML = '<b>Moment, přemýšlím…</b>';
 
       const res = await fetch('/api/improve', {
@@ -87,25 +94,21 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text })
       });
-
       const data = await res.json();
       editor.value = data.text;
       result.innerHTML = '';
     };
 
-    // TLAČÍTKO ZPĚT
-    document.getElementById('btnUndo').onclick = () => {
+    btnUndo.onclick = () => {
       editor.value = beforeImprove;
       result.innerHTML = '';
-      document.getElementById('btnUndo').disabled = true;
+      btnUndo.disabled = true;
     };
 
-    // TLAČÍTKO KOPÍROVAT
-    const btnCopy = document.getElementById('btnCopy');
     btnCopy.onclick = () => {
-      const text = editor.value.trim();
-      if (!text) return;
-      navigator.clipboard.writeText(text)
+      const t = editor.value.trim();
+      if (!t) return;
+      navigator.clipboard.writeText(t)
         .then(() => {
           btnCopy.textContent = 'Zkopírováno ✓';
           setTimeout(() => btnCopy.textContent = 'Kopírovat', 2000);
