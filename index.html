@@ -39,7 +39,6 @@
   </style>
 </head>
 <body>
-
   <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny: co klient zvládne sám a jakou pomoc potřebuje. Naše AI asistentka vám PORADÍ, co do textu doplnit a pomůže vám VYLEPŠIT formulaci. Hotový text můžete KOPÍROVAT do plánu klienta."></textarea><br>
 
   <button id="btnAdvice">Poradit</button>
@@ -54,41 +53,43 @@
     const result = document.getElementById('result');
     let beforeImprove = '';
 
-    async function streamApi(path, payload) {
-      result.innerHTML = "<b>Moment, přemýšlím…</b>";
-      const res = await fetch(path, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok || !res.body) {
-        result.innerHTML = "Chyba při komunikaci s AI.";
-        return;
-      }
-
-      result.innerHTML = "";
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder("utf-8");
-      let done = false;
-
-      while (!done) {
-        const { value, done: readerDone } = await reader.read();
-        done = readerDone;
-        const chunk = decoder.decode(value);
-        result.innerHTML += chunk;
-      }
-    }
-
     async function callApi(path, payload) {
-      result.innerHTML = "<b>Moment, přemýšlím…</b>";
+      result.innerHTML = '<b>Moment, přemýšlím…</b>';
       const res = await fetch(path, {
         method: 'POST',
-        headers: { 'Content-Type':'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
       const data = await res.json();
       return data.text;
+    }
+
+    async function streamApi(path, payload) {
+      result.innerHTML = '<b>Moment, přemýšlím…</b>';
+      const res = await fetch(path, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        result.innerHTML = 'Chyba při načítání odpovědi.';
+        return;
+      }
+
+      result.innerHTML = '';
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let done = false;
+
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        const chunk = decoder.decode(value);
+        const div = document.createElement("div");
+        div.innerHTML = chunk;
+        result.appendChild(div);
+      }
     }
 
     document.getElementById('btnAdvice').onclick = async () => {
