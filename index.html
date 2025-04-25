@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Poradce pro individuální plány</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    textarea {
+      width: 725px;
+      height: 200px;
+      border-radius: 12px;     /* větší zaoblení */
+      border: 1px solid #ccc;
+      padding: 10px;
+      resize: vertical;
+    }
+    button {
+      background: #e76a58;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 999px;    /* úplně zaoblené, pilulka */
+      font-size: 1rem;
+    }
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- nad textovým polem už žádný <h1> -->
+
+  <textarea id="editor" placeholder="Sem napiš text…"></textarea><br>
+
+  <button id="btnAdvice">Poradit</button>
+  <button id="btnImprove">Vylepšit</button>
+  <button id="btnUndo" disabled>Zpět</button>
+  <button id="btnCopy">Kopírovat</button>
+
+  <div id="result"></div>
+
+  <script>
+    const editor = document.getElementById('editor');
+    const result = document.getElementById('result');
+    let beforeImprove = '';
+
+    async function callApi(path, payload) {
+      result.innerHTML = '<b>Moment, přemýšlím…</b>';
+      const res = await fetch(path, {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      return data.text;
+    }
+
+    document.getElementById('btnAdvice').onclick = async () => {
+      const text = editor.value.trim();
+      if (!text) return alert('Napiš nejdřív text.');
+      const advice = await callApi('/api/advice', { text });
+      result.innerHTML = advice;
+    };
+
+    document.getElementById('btnImprove').onclick = async () => {
+      const text = editor.value.trim();
+      if (!text) return alert('Napiš nejdřív text.');
+      beforeImprove = text;
+      document.getElementById('btnUndo').disabled = false;
+      const improved = await callApi('/api/improve', { text });
+      editor.value = improved;
+      result.innerHTML = '';
+    };
+
+    document.getElementById('btnUndo').onclick = () => {
+      editor.value = beforeImprove;
+      result.innerHTML = '';
+      document.getElementById('btnUndo').disabled = true;
+    };
+
+    document.getElementById('btnCopy').onclick = () => {
+      navigator.clipboard.writeText(editor.value)
+        .then(() => alert('Zkopírováno!'))
+        .catch(() => alert('Nepodařilo se kopírovat.'));
+    };
+  </script>
+</body>
+</html>
