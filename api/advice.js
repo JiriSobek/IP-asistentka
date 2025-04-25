@@ -31,7 +31,8 @@ Zvaž tyto klíčové body:
 
 Pokud něco důležitého chybí nebo je příliš obecné, napiš 5–7 otázek, které pomohou text doplnit a upřesnit, jak má péče o klienta vypadat.
 Pokud z textu plyne, že klientka hygienu celkově nezvládá, neptej se co zvládá.
-Pokud je text v pořádku nebo pokud klient hygienu zvládá sám, žádné otázky nepokládej. 
+Pokud je text v pořádku nebo pokud klient hygienu zvládá sám, žádné otázky nepokládej.
+Piš odpovědi v délce mavimálně 1600 znaků.
 
 Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
 `;
