@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <title>AI asistentka</title>
+  <meta charset="UTF-8" />
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-                   "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       font-size: 16px;
       line-height: 1.5;
       padding: 20px;
@@ -53,53 +51,60 @@
   <script>
     const editor = document.getElementById('editor');
     const result = document.getElementById('result');
-    const btnCopy = document.getElementById('btnCopy');
     const btnUndo = document.getElementById('btnUndo');
-    const btnAdvice = document.getElementById('btnAdvice');
-    const btnImprove = document.getElementById('btnImprove');
+    const btnCopy = document.getElementById('btnCopy');
     let beforeImprove = '';
 
-    async function fetchStream(path, payload, updateEditor = false) {
-      result.innerHTML = "<b>Moment, přemýšlím…</b>";
-      const response = await fetch(path, {
+    // STREAMOVANÁ ODPOVĚĎ – PORADIT
+    document.getElementById('btnAdvice').onclick = async () => {
+      const text = editor.value.trim();
+      if (!text) return alert('Napiš nejdřív text.');
+
+      result.innerHTML = '<b>Moment, přemýšlím…</b>';
+
+      const response = await fetch('/api/advice', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({ text })
       });
 
-      if (!response.ok || !response.body) {
-        result.innerHTML = 'Chyba při načítání odpovědi.';
+      if (!response.body) {
+        result.innerHTML = 'Chyba při streamování.';
         return;
       }
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder('utf-8');
-      let fullText = '';
+      const parser = new DOMParser();
       result.innerHTML = '';
 
       while (true) {
-        const { done, value } = await reader.read();
+        const { value, done } = await reader.read();
         if (done) break;
         const chunk = decoder.decode(value, { stream: true });
-        result.innerHTML += chunk;
-        fullText += chunk;
+        const doc = parser.parseFromString(chunk, 'text/html');
+        result.insertAdjacentHTML('beforeend', doc.body.innerHTML);
       }
-
-      if (updateEditor) editor.value = fullText;
-    }
-
-    btnAdvice.onclick = async () => {
-      const text = editor.value.trim();
-      if (!text) return alert('Napiš nejdřív text.');
-      await fetchStream('/api/advice', { text });
     };
 
-    btnImprove.onclick = async () => {
+    // VYLEPŠENÍ TEXTU – NON-STREAM
+    document.getElementById('btnImprove').onclick = async () => {
       const text = editor.value.trim();
       if (!text) return alert('Napiš nejdřív text.');
+
       beforeImprove = text;
       btnUndo.disabled = false;
-      await fetchStream('/api/improve', { text }, true);
+      result.innerHTML = '<b>Moment, přemýšlím…</b>';
+
+      const res = await fetch('/api/improve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+
+      const data = await res.json();
+      editor.value = data.text;
+      result.innerHTML = '';
     };
 
     btnUndo.onclick = () => {
@@ -111,14 +116,16 @@
     btnCopy.onclick = () => {
       const text = editor.value.trim();
       if (!text) return;
+
       navigator.clipboard.writeText(text).then(() => {
         btnCopy.textContent = 'Zkopírováno ✓';
-        setTimeout(() => (btnCopy.textContent = 'Kopírovat'), 2000);
+        setTimeout(() => btnCopy.textContent = 'Kopírovat', 2000);
       }).catch(() => {
         btnCopy.textContent = 'Chyba při kopírování';
-        setTimeout(() => (btnCopy.textContent = 'Kopírovat'), 2000);
+        setTimeout(() => btnCopy.textContent = 'Kopírovat', 2000);
       });
     };
   </script>
 </body>
 </html>
+
