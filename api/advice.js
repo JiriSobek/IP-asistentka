@@ -25,7 +25,7 @@ Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
 `;
 
     const chat = await openai.chat.completions.create({
-      model: "gpt-4-0613", // nebo zkus "gpt-4-0125-preview"
+      model: "gpt-4-0125-preview", 
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: userPrompt }
