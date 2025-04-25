@@ -36,7 +36,7 @@
   </style>
 </head>
 <body>
-  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny..."></textarea><br>
+  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny: co klient zvládne sám a jakou pomoc potřebuje. Naše AI asistentka vám PORADÍ, co do textu doplnit a pomůže vám VYLEPŠIT formulaci. Hotový text můžete KOPÍROVAT do plánu klienta."></textarea><br>
 
   <button id="btnAdvice">Poradit</button>
   <button id="btnImprove">Vylepšit</button>
@@ -57,39 +57,34 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+
+      if (!res.body) {
+        result.innerHTML = 'Chyba: odpověď je prázdná.';
+        return '';
+      }
+
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let done = false, started = false, fullText = '';
-      result.innerHTML = '';
+      let done = false;
+      let fullText = '';
+
+      result.innerHTML = ''; // vyčisti výstup před streamováním
 
       while (!done) {
-        const { value, done: d } = await reader.read();
-        done = d;
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
         if (value) {
-          let chunk = decoder.decode(value, { stream: true });
-
-          // 1) Odstraň Markdown code fence
-          if (!started) {
-            chunk = chunk.replace(/^```html\s*/i, '');
-            started = true;
-          }
-          chunk = chunk.replace(/```$/, '');
-
-          // 2) Odstraň HTML <html>, <head>, <body> bloky
-          chunk = chunk
-            .replace(/<\s*html[^>]*>/gi, '')
-            .replace(/<\s*\/\s*html\s*>/gi, '')
-            .replace(/<\s*head[^>]*>[\s\S]*?<\s*\/\s*head\s*>/gi, '')
-            .replace(/<\s*body[^>]*>/gi, '')
-            .replace(/<\s*\/\s*body\s*>/gi, '');
-
-          // 3) Odstraň zbytkové ">" z Markdownových citací na začátku řádků
-          chunk = chunk.replace(/^\s*>+\s*/gm, '');
-
+          const chunk = decoder.decode(value, { stream: true });
           fullText += chunk;
           result.innerHTML += chunk;
         }
       }
+
+      // Po dokončení parsejeme do HTML a zobrazíme jen <body>
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(fullText, 'text/html');
+      result.innerHTML = doc.body.innerHTML;
+
       return fullText;
     }
 
