@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <title>Poradce pro individuální plány</title>
+  …
   <style>
+    /* Globální nastavení fontu pro odpovědi */
     body {
-      font-family: sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;            /* nebo 1rem, pokud ti to vyhovuje */
+      line-height: 1.5;
       padding: 20px;
     }
+
     textarea {
       width: 725px;
       height: 200px;
-      border-radius: 12px;     /* větší zaoblení */
+      border-radius: 12px;
       border: 1px solid #ccc;
       padding: 10px;
       resize: vertical;
+
+      /* přidáno: dědění fontu a velikosti z body */
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
     }
+
     button {
       background: #e76a58;
       color: white;
@@ -23,11 +33,13 @@
       padding: 10px 20px;
       margin: 5px;
       cursor: pointer;
-      border-radius: 999px;    /* úplně zaoblené, pilulka */
+      border-radius: 999px;
       font-size: 1rem;
     }
+
     #result {
       margin-top: 20px;
+      /* pokud v #result potřebuješ nějak jiný řádkování nebo barvu, můžeš sem přidat */
     }
   </style>
 </head>
