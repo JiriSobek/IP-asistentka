@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <title>AI asistentka pro individuální plán</title>
+  <meta charset="UTF-8">
+  <title>AI asistentka</title>
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont,
@@ -41,7 +41,7 @@
   </style>
 </head>
 <body>
-  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny: co klient zvládne sám a jakou pomoc potřebuje. Naše AI asistentka vám PORADÍ, co do textu doplnit a pomůže vám VYLEPŠIT formulaci. Hotový text můžete KOPÍROVAT do plánu klienta."></textarea><br>
+  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny: co klient zvládne sám a jakou pomoc potřebuje. Naše AI asistentka vám PORADÍ, co do textu doplnit a pomůže vám VYLEPŠIT formulaci. Hotový text můžete KOPÍROVAT do plánu klienta."></textarea><br>
 
   <button id="btnAdvice">Poradit</button>
   <button id="btnImprove">Vylepšit</button>
@@ -59,7 +59,7 @@
     const btnImprove = document.getElementById('btnImprove');
     let beforeImprove = '';
 
-    async function fetchStream(path, payload) {
+    async function fetchStream(path, payload, updateEditor = false) {
       result.innerHTML = "<b>Moment, přemýšlím…</b>";
       const response = await fetch(path, {
         method: 'POST',
@@ -72,10 +72,10 @@
         return;
       }
 
-      result.innerHTML = '';
       const reader = response.body.getReader();
       const decoder = new TextDecoder('utf-8');
       let fullText = '';
+      result.innerHTML = '';
 
       while (true) {
         const { done, value } = await reader.read();
@@ -85,7 +85,7 @@
         fullText += chunk;
       }
 
-      return fullText;
+      if (updateEditor) editor.value = fullText;
     }
 
     btnAdvice.onclick = async () => {
@@ -99,11 +99,7 @@
       if (!text) return alert('Napiš nejdřív text.');
       beforeImprove = text;
       btnUndo.disabled = false;
-      const improved = await fetchStream('/api/improve', { text });
-      if (improved) {
-        editor.value = improved;
-        result.innerHTML = '';
-      }
+      await fetchStream('/api/improve', { text }, true);
     };
 
     btnUndo.onclick = () => {
