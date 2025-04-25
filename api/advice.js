@@ -19,6 +19,7 @@ Text k posouzení:
 =====
 ${text}
 =====
+
 V odpovědi nejprve oceň snahu pracovnice při vytváření individuálního plánu.
 Dobrý individuální plán jasně a srozumitelně popisuje, co klient zvládá sám a s čím potřebuje pomoc. Popisuje, jak konkrétně tato pomoc probíhá. Zvaž tyto klíčové body: 
 1. Je popsáno, co klient zvládá sám při ranní a večerní hygieně (např. umýt si ruce, obličej, vyčistit zuby)? Je konkrétně popsaná potřebná pomoc ze strany pracovnic?
@@ -36,18 +37,30 @@ Piš odpovědi v délce maximálně 1600 znaků.
 Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
 `;
 
-    const chat = await openai.chat.completions.create({
-      model: "gpt-4-0125-preview", 
+    // Streamování odpovědi
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    const stream = await openai.chat.completions.create({
+      model: "gpt-4-0125-preview",
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: userPrompt }
-      ]
+      ],
+      stream: true
     });
 
-    const advice = chat.choices[0].message.content;
-    res.status(200).json({ text: advice });
+    for await (const chunk of stream) {
+      const token = chunk.choices[0]?.delta?.content;
+      if (token) {
+        res.write(token);
+      }
+    }
+
+    res.end();
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Chyba serveru při volání OpenAI" });
+    res.status(500).end("Chyba serveru při volání OpenAI");
   }
 }
