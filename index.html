@@ -72,7 +72,7 @@
       let fullText = '';
       let started = false;
 
-      result.innerHTML = ''; // začátek streamu
+      result.innerHTML = '';
 
       while (!done) {
         const { value, done: doneReading } = await reader.read();
@@ -80,13 +80,21 @@
         if (value) {
           let chunk = decoder.decode(value, { stream: true });
 
-          // Zahazuj začátek kódu (```html nebo ```), jen jednou
+          // Odstraň začátek ```html
           if (!started) {
             chunk = chunk.replace(/^```html\s*/i, '');
             started = true;
           }
-          // Odstraň koncové ```
+          // Odstraň konec ```
           chunk = chunk.replace(/```$/, '');
+
+          // Odstraň celé <html>, <head>, <body> bloky
+          chunk = chunk
+            .replace(/<\s*html[^>]*>/gi, '')
+            .replace(/<\s*\/\s*html\s*>/gi, '')
+            .replace(/<\s*head[^>]*>[\s\S]*?<\s*\/\s*head\s*>/gi, '')
+            .replace(/<\s*body[^>]*>/gi, '')
+            .replace(/<\s*\/\s*body\s*>/gi, '');
 
           fullText += chunk;
           result.innerHTML += chunk;
