@@ -2,14 +2,15 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <title>AI asistentka pro individuální plán</title>
   <style>
     body {
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       font-size: 16px;
       line-height: 1.5;
       padding: 20px;
     }
+
     textarea {
       width: 725px;
       height: 200px;
@@ -17,8 +18,11 @@
       border: 1px solid #ccc;
       padding: 10px;
       resize: vertical;
-      font: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
     }
+
     button {
       background: #e76a58;
       color: white;
@@ -29,13 +33,14 @@
       border-radius: 999px;
       font-size: 1rem;
     }
-    #result { margin-top: 20px; }
+
+    #result {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <textarea id="editor"
-    placeholder="Zde napište text…">
-  </textarea><br>
+  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny: co klient zvládne sám a jakou pomoc potřebuje. Naše AI asistentka vám PORADÍ, co do textu doplnit a pomůže vám VYLEPŠIT formulaci. Hotový text můžete KOPÍROVAT do plánu klienta."></textarea><br>
 
   <button id="btnAdvice">Poradit</button>
   <button id="btnImprove">Vylepšit</button>
@@ -49,75 +54,78 @@
     const result = document.getElementById('result');
     let beforeImprove = '';
 
-    // 1) Stream poradit
-    document.getElementById('btnAdvice').onclick = async () => {
-      const text = editor.value.trim();
-      if (!text) return alert('Napiš nejdřív text.');
-      result.innerHTML = '<b>Moment, přemýšlím…</b>';
-
-      const res = await fetch('/api/advice', {
+    async function streamApi(path, payload) {
+      result.innerHTML = '';
+      const res = await fetch(path, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text })
+        body: JSON.stringify(payload)
       });
+
       if (!res.ok || !res.body) {
-        result.innerHTML = '<b>Chyba při načítání odpovědi.</b>';
+        result.innerHTML = 'Chyba při načítání odpovědi.';
         return;
       }
 
-      result.innerHTML = '';  // vyčistit
       const reader = res.body.getReader();
       const decoder = new TextDecoder('utf-8');
+      let buffer = '';
 
-      //  important: insertAdjacentHTML místo innerHTML+=parser!
       while (true) {
-        const { done, value } = await reader.read();
+        const { value, done } = await reader.read();
         if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        result.insertAdjacentHTML('beforeend', chunk);
+        buffer += decoder.decode(value, { stream: true });
+
+        // odstranění markdownového ohraničení a update obsahu
+        let cleaned = buffer.replace(/```html\s*/g, '').replace(/```/g, '');
+        result.innerHTML = cleaned;
       }
+    }
+
+    async function callApi(path, payload) {
+      result.innerHTML = '<b>Moment, přemýšlím…</b>';
+      const res = await fetch(path, {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      return data.text;
+    }
+
+    document.getElementById('btnAdvice').onclick = async () => {
+      const text = editor.value.trim();
+      if (!text) return alert('Napiš nejdřív text.');
+      streamApi('/api/advice', { text });
     };
 
-    // 2) Jednorázové vylepšit
     document.getElementById('btnImprove').onclick = async () => {
       const text = editor.value.trim();
       if (!text) return alert('Napiš nejdřív text.');
       beforeImprove = text;
       document.getElementById('btnUndo').disabled = false;
-      result.innerHTML = '<b>Moment, přemýšlím…</b>';
-
-      const res = await fetch('/api/improve', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text })
-      });
-      const data = await res.json();
-      editor.value = data.text;
+      const improved = await callApi('/api/improve', { text });
+      editor.value = improved;
       result.innerHTML = '';
     };
 
-    // 3) Zpět
     document.getElementById('btnUndo').onclick = () => {
       editor.value = beforeImprove;
       result.innerHTML = '';
       document.getElementById('btnUndo').disabled = true;
     };
 
-    // 4) Kopírovat
-    document.getElementById('btnCopy').onclick = () => {
-      const t = editor.value.trim();
-      if (!t) return;
-      navigator.clipboard.writeText(t)
-        .then(() => {
-          const b = document.getElementById('btnCopy');
-          b.textContent = 'Zkopírováno ✓';
-          setTimeout(() => b.textContent = 'Kopírovat', 2000);
-        })
-        .catch(() => {
-          const b = document.getElementById('btnCopy');
-          b.textContent = 'Chyba při kopírování';
-          setTimeout(() => b.textContent = 'Kopírovat', 2000);
-        });
+    const btnCopy = document.getElementById('btnCopy');
+    btnCopy.onclick = () => {
+      const text = editor.value.trim();
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        btnCopy.textContent = 'Zkopírováno ✓';
+        setTimeout(() => { btnCopy.textContent = 'Kopírovat'; }, 2000);
+      }).catch(() => {
+        btnCopy.textContent = 'Chyba při kopírování';
+        setTimeout(() => { btnCopy.textContent = 'Kopírovat'; }, 2000);
+      });
     };
   </script>
 </body>
