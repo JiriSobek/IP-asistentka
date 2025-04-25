@@ -38,30 +38,26 @@ Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
 
     const stream = await openai.chat.completions.create({
       model: "gpt-4-0125-preview",
+      stream: true,
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: userPrompt }
-      ],
-      stream: true
+      ]
     });
 
     res.writeHead(200, {
-      'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive'
+      "Content-Type": "text/html; charset=utf-8",
+      "Transfer-Encoding": "chunked"
     });
 
     for await (const chunk of stream) {
       const content = chunk.choices?.[0]?.delta?.content;
-      if (content) {
-        res.write(content);
-      }
+      if (content) res.write(content);
     }
 
     res.end();
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Chyba serveru při volání OpenAI" });
+    console.error("Chyba při volání OpenAI:", err);
+    res.status(500).send("Chyba serveru při volání OpenAI");
   }
 }
-
