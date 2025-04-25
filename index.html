@@ -9,7 +9,6 @@
       line-height: 1.5;
       padding: 20px;
     }
-
     textarea {
       width: 725px;
       height: 200px;
@@ -21,7 +20,6 @@
       font-size: inherit;
       line-height: inherit;
     }
-
     button {
       background: #e76a58;
       color: white;
@@ -32,14 +30,13 @@
       border-radius: 999px;
       font-size: 1rem;
     }
-
     #result {
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny: co klient zvládne sám a jakou pomoc potřebuje. Naše AI asistentka vám PORADÍ, co do textu doplnit a pomůže vám VYLEPŠIT formulaci. Hotový text můžete KOPÍROVAT do plánu klienta."></textarea><br>
+  <textarea id="editor" placeholder="Zde popište podporu v oblasti hygieny..."></textarea><br>
 
   <button id="btnAdvice">Poradit</button>
   <button id="btnImprove">Vylepšit</button>
@@ -60,35 +57,25 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-
-      if (!res.body) {
-        result.innerHTML = 'Chyba: odpověď je prázdná.';
-        return '';
-      }
-
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let done = false;
-      let fullText = '';
-      let started = false;
-
+      let done = false, started = false, fullText = '';
       result.innerHTML = '';
 
       while (!done) {
-        const { value, done: doneReading } = await reader.read();
-        done = doneReading;
+        const { value, done: d } = await reader.read();
+        done = d;
         if (value) {
           let chunk = decoder.decode(value, { stream: true });
 
-          // Odstraň začátek ```html
+          // 1) Odstraň Markdown code fence
           if (!started) {
             chunk = chunk.replace(/^```html\s*/i, '');
             started = true;
           }
-          // Odstraň konec ```
           chunk = chunk.replace(/```$/, '');
 
-          // Odstraň celé <html>, <head>, <body> bloky
+          // 2) Odstraň HTML <html>, <head>, <body> bloky
           chunk = chunk
             .replace(/<\s*html[^>]*>/gi, '')
             .replace(/<\s*\/\s*html\s*>/gi, '')
@@ -96,11 +83,13 @@
             .replace(/<\s*body[^>]*>/gi, '')
             .replace(/<\s*\/\s*body\s*>/gi, '');
 
+          // 3) Odstraň zbytkové ">" z Markdownových citací na začátku řádků
+          chunk = chunk.replace(/^\s*>+\s*/gm, '');
+
           fullText += chunk;
           result.innerHTML += chunk;
         }
       }
-
       return fullText;
     }
 
@@ -130,17 +119,9 @@
     btnCopy.onclick = () => {
       const text = editor.value.trim();
       if (!text) return;
-
       navigator.clipboard.writeText(text).then(() => {
         btnCopy.textContent = 'Zkopírováno ✓';
-        setTimeout(() => {
-          btnCopy.textContent = 'Kopírovat';
-        }, 2000);
-      }).catch(() => {
-        btnCopy.textContent = 'Chyba při kopírování';
-        setTimeout(() => {
-          btnCopy.textContent = 'Kopírovat';
-        }, 2000);
+        setTimeout(() => btnCopy.textContent = 'Kopírovat', 2000);
       });
     };
   </script>
