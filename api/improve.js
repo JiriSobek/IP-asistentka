@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   try {
     const { text } = req.body;
     const prompt = `
-Jsi jazykový poradce. Přeformuluj a vylepši následující text tak, aby byl maximálně srozumitelný, napsaný přirozeným jazykem, bez cizích slov a odborných termínů. Význam textu musí zůstat zachován. Když je text mlhavý, nic si nedomýšlej a proveď jen malé změny:
+Jsi jazykový poradce. Přeformuluj a vylepši následující text tak, aby byl srozumitelný, napsaný přirozeným jazykem, dobrou češtinou, bez cizích slov a odborných termínů. Význam textu musí zůstat zachován. Když je text v bodech, přeformuluj ho ve větách. Když je text mlhavý, nic si nedomýšlej a proveď jen malé změny:
 "${text}"
 Výsledek bez HTML formátování.
     `;
