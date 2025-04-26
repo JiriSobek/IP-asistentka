@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   try {
     const { text } = req.body;
     const prompt = ` 
-Přepiš následující text tak, aby byl srozumitelný, plynulý a zněl jako běžná mluvená nebo psaná čeština. Piš přirozenou, pěknou češtinou bez cizích slov a odborných termínů. Zachovej význam, ale klidně změň větnou stavbu, rozděl nebo spoj věty, aby text působil přirozeně:
+Přepiš následující text do plynulé, přirozené a pěkné češtiny, vhodné pro profesionální, ale lidskou komunikaci. Zachovej význam, ale zlepši větnou stavbu, aby text zněl srozumitelně, jemně a přirozeně. Případně rozděl nebo spoj věty pro lepší plynulost. Nepoužívej cizí slova, odborné výrazy ani HTML. Piš tak, aby text působil uceleně a přívětivě:
 "${text}"
 Výsledek bez HTML formátování.
     `;
