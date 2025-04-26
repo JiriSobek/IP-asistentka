@@ -7,8 +7,8 @@ const openai = new OpenAI({
 export default async function handler(req, res) {
   try {
     const { text } = req.body;
-    const prompt = `
-Jsi jazykový poradce. Mluvíš krásnou češtinou podle všech gramatických pravidel. Přeformuluj a vylepši následující text tak, aby byl srozumitelný, napsaný běžným přirozeným jazykem, dobrou češtinou, bez cizích slov a odborných termínů. Význam textu musí zůstat zachován:
+    const prompt = ` 
+Přepiš následující text tak, aby byl srozumitelný, plynulý a zněl jako běžná mluvená nebo psaná čeština. Piš přirozenou, pěknou češtinou bez cizích slov a odborných termínů. Zachovej význam, ale klidně změň větnou stavbu, rozděl nebo spoj věty, aby text působil přirozeně:
 "${text}"
 Výsledek bez HTML formátování.
     `;
