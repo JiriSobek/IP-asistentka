@@ -25,9 +25,10 @@ Dobrý individuální plán jasně a srozumitelně popisuje, co klient zvládá 
 1. Je popsáno, jakou pomoc potřebuje klient při ranní a večerní hygieně (např. při opláchnutí obličeje, čištění zubů, česání)? Je potřebná pomoc popsaná konkrétně?
 2. Je popsáno, jakou pomoc potřebuje klient při celkové hygieně (koupání, sprchování) a s čím konkrétně potřebuje pomoc (např. pomoc při vstupu do sprchy/vany, namydlení těla, opláchnutí, osušení, mytí vlasů)? 
 3. Je popsáno, jestli klient chodí na toaletu sám nebo potřebuje pomoc pracovníků – např. pomoc s posazením na mísu, s očištěním po vykonání potřeby?
-4. Je popsáno, jestli zvládne klient sám stříhání nehtů? Pokud nezvládne, je konkrétně popsáno, jakou potřebuje pomoc? 
-5. Má klient nějaká zvláštní přání nebo zvyklosti ohledně hygieny? Používá klient nějaké pomůcky (madlo, protiskluzová podložka, stolička ve sprše, koupací lůžko, zvedák)? 
-6. Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak riziku předcházet.
+4. Je popsáno, jestli zvládne klient sám stříhání nehtů? Pokud nezvládne, je konkrétně popsáno, jakou potřebuje pomoc?
+5. A jak je to se stříháním vlasů? Využívá klient služeb kadeřníka nebo vlasy stříhá personál?
+6. Má klient nějaká zvláštní přání nebo zvyklosti ohledně hygieny? Používá klient nějaké pomůcky (madlo, protiskluzová podložka, stolička ve sprše, koupací lůžko, zvedák)? 
+7. Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak riziku předcházet.
 
 Řiď se těmito pravidly:
 1. Pokud něco důležitého chybí nebo je popis příliš obecný, napiš několik otázek, které pomohou text doplnit a upřesnit. Ptej se na podrobnosti, jak má pomoc klientovi u jednotlivých úkonů probíhat.
