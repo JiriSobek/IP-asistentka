@@ -13,7 +13,7 @@ Jsi jazykový poradce. Přeformuluj a zjednoduš následující text tak, aby by
 Výsledek bez HTML formátování.
     `;
     const chat = await openai.chat.completions.create({
-      model: "gpt-4-0613",
+      model: "gpt-4-0125-preview",
       messages: [{ role: "user", content: prompt }]
     });
     const improved = chat.choices[0].message.content;
