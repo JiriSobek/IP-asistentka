@@ -8,22 +8,23 @@ export default async function handler(req, res) {
   try {
     const { text } = req.body;
     const prompt = ` 
-Jsi jazyková redaktorka a zkušená sociální pracovnice. Pomáháš upravit text v individuálním plánu tak, aby byl stylisticky lepší a srozumitelnější, ale významově zůstal úplně stejný.
+Jsi zkušená sociální pracovnice a jazyková redaktorka. Pomáháš upravit texty v individuálních plánech tak, aby byly dobře čitelné, přirozené a přívětivé.
 
 Přepiš následující text tak, aby:
-- byl jednodušší, přirozený a snadno srozumitelný i pro člověka se základním vzděláním,
-- působil přívětivě, lidsky a profesionálně,
-- měl plynulou větnou stavbu, bez zbytečně dlouhých nebo kostrbatých vět,
-- neobsahoval pokud možno cizí výrazy, odborná slova, úřednický nebo formální styl,
-- neobsahoval žádné HTML ani vysvětlivky,
-- a zachoval všechny důležité informace beze změny nebo vynechání.
+- byl přehlednější, plynulejší a stylisticky čistší,
+- zněl přirozeně, jednoduše a srozumitelně – jako běžný popis v individuálním plánu,
+- zachoval všechny původní informace beze změny nebo vynechání,
+- nepoužíval cizí výrazy, odborná slova ani úřední nebo akademický styl,
+- nebyl delší než původní text (počtem znaků).
 
-Neměň smysl vět, nepřidávej žádné domněnky ani nové informace.  
-Výstup vrať jako čistý, přepsaný text bez komentářů.
+Nepřidávej nové informace ani nevysvětluj věci, které v textu nejsou.  
+Nepřidávej žádné komentáře, vysvětlení ani hodnocení.
+
+Text uprav tak, aby působil jako přirozeně napsaný popis od pečující pracovnice. Používej běžný přirozený jazyk.  
+Výstup vrať jako čistý text bez HTML.
 
 Text k úpravě:
 """${text}"""
-
     `;
     const chat = await openai.chat.completions.create({
       model: "gpt-4o",
