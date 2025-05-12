@@ -26,7 +26,7 @@ Text k úpravě:
 
     `;
     const chat = await openai.chat.completions.create({
-      model: "gpt-4-0125-preview",
+      model: "gpt-4o",
       messages: [{ role: "user", content: prompt }]
     });
     const improved = chat.choices[0].message.content;
