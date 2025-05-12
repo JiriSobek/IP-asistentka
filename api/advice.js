@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+zajištěno import OpenAI from "openai";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
@@ -24,7 +24,7 @@ Dobrý individuální plán jasně a srozumitelně popisuje, co klient zvládá 
 1. Je popsáno, jakou pomoc potřebuje klient při ranní a večerní hygieně (např. při opláchnutí obličeje, čištění zubů, česání)? Je potřebná pomoc popsaná konkrétně?
 2. Je popsáno, jakou pomoc potřebuje klient při celkové hygieně (koupání, sprchování) a s čím konkrétně potřebuje pomoc (např. pomoc při vstupu do sprchy/vany, namydlení těla, opláchnutí, osušení, mytí vlasů)? 
 3. Je popsáno, jestli klient potřebuje pomoc při užívání toalety?
-4. Je popsáno, jestli zvládne klient sám stříhání nehtů? Pokud nezvládne, je konkrétně popsáno, jakou potřebuje pomoc? A stříhání vlasů? Využívá klient služeb kadeřníka nebo vlasy stříhá personál?
+4. Je popsáno, jestli zvládne klient sám stříhání nehtů? Pokud nezvládne, je konkrétně popsáno, jakou potřebuje pomoc? A jak je zajištěno stříhání vlasů? Využívá klient služeb kadeřníka nebo vlasy stříhá personál?
 5. Má klient nějaká zvláštní přání nebo zvyklosti ohledně hygieny? Používá nějaké pomůcky (madlo, protiskluzová podložka, stolička ve sprše, koupací lůžko, zvedák)? 
 6. Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak riziku předcházet.
 
