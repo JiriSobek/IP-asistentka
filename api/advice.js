@@ -44,6 +44,7 @@ Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
     const stream = await openai.beta.chat.completions.stream({
       model: "gpt-4o",
       stream: true,
+      temperature: 0.7,
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: userPrompt }
