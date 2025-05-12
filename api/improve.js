@@ -27,6 +27,7 @@ Text k úpravě:
     `;
     const chat = await openai.chat.completions.create({
       model: "gpt-4o",
+      temperature: 0.5,
       messages: [{ role: "user", content: prompt }]
     });
     const improved = chat.choices[0].message.content;
