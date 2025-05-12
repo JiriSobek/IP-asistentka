@@ -8,16 +8,18 @@ export default async function handler(req, res) {
   try {
     const { text } = req.body;
     const prompt = ` 
-Jsi jazyková redaktorka a zkušená sociální pracovnice. Pomáháš přepsat text tak, aby byl srozumitelný, gramaticky správný, přirozený a vhodný pro individuální plán v sociálních službách.
+Jsi jazyková redaktorka a zkušená sociální pracovnice. Pomáháš upravit text v individuálním plánu tak, aby byl stylisticky lepší a srozumitelnější, ale významově zůstal úplně stejný.
 
 Přepiš následující text tak, aby:
-- byl dobře čitelný, jednoduchý a přívětivý,
-- zněl jako běžná, ale profesionální čeština bez úředního nebo technického stylu,
-- zachoval všechny věcné informace,
-- měl plynulou větnou stavbu – můžeš rozdělit nebo spojit věty, upravit slovosled nebo přeformulovat části tak, aby text lépe zněl,
-- pokud to je možné, nepoužívej cizí slova, odborné výrazy ani HTML značky.
+- byl jednodušší, přirozený a snadno srozumitelný i pro člověka se základním vzděláním,
+- působil přívětivě, lidsky a profesionálně,
+- měl plynulou větnou stavbu, bez zbytečně dlouhých nebo kostrbatých vět,
+- neobsahoval pokud možno cizí výrazy, odborná slova, úřednický nebo formální styl,
+- neobsahoval žádné HTML ani vysvětlivky,
+- a zachoval všechny důležité informace beze změny nebo vynechání.
 
-Nepiš nic navíc, nehodnoť text a výsledek vrať pouze jako čistý přepsaný text bez komentářů.
+Neměň smysl vět, nepřidávej žádné domněnky ani nové informace.  
+Výstup vrať jako čistý, přepsaný text bez komentářů.
 
 Text k úpravě:
 """${text}"""
