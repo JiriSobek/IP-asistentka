@@ -15,7 +15,8 @@ Jsi zkušená pracovnice v sociálních službách. Pomáháš kolegyním upravi
     
     const userPrompt = `
 Přepiš následující text tak, aby byl přehlednější, jednodušší a stylisticky přirozený.  
-Používej jazyk běžný v sociálních službách – konkrétní, srozumitelný a lidský.  
+Používej jazyk běžný v sociálních službách – konkrétní, srozumitelný a lidský.
+Pokud je pomoc popsána v infinitivu (např. Pomoc s koupelí), převeď větu do 3. osoby (Např. Klient potřebuje pomoc s koupelí).
 Nepřidávej žádné nové informace ani vysvětlení.  
 Nepoužívej cizí slova, odborné výrazy ani formální styl.  
 Zachovej všechny původní informace.  
