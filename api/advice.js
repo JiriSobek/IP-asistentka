@@ -22,16 +22,16 @@ ${text}
 V odpovědi nejprve jednou větou oceň snahu pracovnice při vytváření individuálního plánu. Používej tykání.
 Nepiš žádné doplňující otázky ani doporučení, pokud z textu plyne, že klient zvládá celou oblast hygieny samostatně.
 Nepokládej doplňující otázky týkající se úkonů hygieny, u kterých z textu plyne, že je klient zvládá samostatně.
-Zvaž tyto klíčové body - ale jen v případě, že dle textu klient s danou činností potřebuje pomoc: 
-1. Je popsáno, jakou pomoc potřebuje klient při ranní a večerní hygieně (např. při opláchnutí obličeje, čištění zubů, česání)? Je potřebná pomoc popsaná konkrétně?
-2. Je popsáno, jakou pomoc potřebuje klient při celkové hygieně (koupání, sprchování) a s čím konkrétně potřebuje pomoc (např. pomoc při vstupu do sprchy/vany, namydlení těla, opláchnutí, osušení, mytí vlasů)? 
-3. Je popsáno, jestli klient potřebuje pomoc při užívání toalety?
-4. Je popsáno, jestli zvládne klient sám stříhání nehtů? Pokud nezvládne, je konkrétně popsáno, jakou potřebuje pomoc? A jak je zajištěno stříhání vlasů? Využívá klient služeb kadeřníka nebo vlasy stříhá personál?
+Zkontroluj, zda je z textu zřejmé:
+1. Potřebuje klient pomoc při ranní a večerní hygieně (např. při opláchnutí obličeje, čištění zubů, česání)? Je potřebná pomoc popsaná konkrétně?
+2. Potřebuje klient pomoc při celkové hygieně (koupání, sprchování) a s čím konkrétně potřebuje pomoc (např. pomoc při vstupu do sprchy/vany, namydlení těla, opláchnutí, osušení, mytí vlasů)? 
+3. Potřebuje klient pomoc při užívání toalety?
+4. Potřebuje klient pomoc při stříhání nehtů? A jak je zajištěno stříhání vlasů? Využívá klient služeb kadeřníka nebo vlasy stříhá personál?
 5. Má klient nějaká zvláštní přání nebo zvyklosti ohledně hygieny? Používá nějaké pomůcky (madlo, protiskluzová podložka, stolička ve sprše, koupací lůžko, zvedák)? 
 6. Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak riziku předcházet.
 
 Řiď se těmito pravidly:
-Pokud něco důležitého chybí nebo je popis příliš obecný a nekonkrétní, napiš několik otázek, které pomohou text doplnit a upřesnit. Pokládej doplňující otázky JEN u úkonů, kde klient potřebuje pomoc. Ptej se na podrobnosti, jak má pomoc klientovi u jednotlivých úkonů probíhat.
+Pokud něco důležitého chybí nebo je popis příliš obecný a nekonkrétní, napiš několik otázek, které pomohou text doplnit a upřesnit. Ptej se na podrobnosti, jak má pomoc klientovi u jednotlivých úkonů probíhat. Pokládej otázky JEN u úkonů, kde klient potřebuje pomoc. Když z textu plyne, že klient pomoc nepotřebuje, otázky nepokládej.
 Když narazíš na slova "dohled", "podpora", "slovní vedení", "slovní podpora" chtěj vědět, co přesně tím pracovnice myslí, jak konkrétně dohled, podpora nebo slovní vedení probíhá.
 Pokud z textu plyne, že klient je zcela závislý na pomoci pracovnic, neptej se, co klient zvládá sám.
 Pokud je v textu k posouzení řeč o klientovi - muži, piš o něm v mužském rodě. Pokud je zmíněna klientka - žena, piš o ní v ženském rodě.
@@ -44,7 +44,7 @@ Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
     const stream = await openai.beta.chat.completions.stream({
       model: "gpt-4o",
       stream: true,
-      temperature: 0.7,
+      temperature: 0.6,
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: userPrompt }
