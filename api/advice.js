@@ -42,7 +42,7 @@ Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
 
 
     const stream = await openai.beta.chat.completions.stream({
-      model: "gpt-4",
+      model: "gpt-4o",
       stream: true,
       messages: [
         { role: "system", content: systemMessage },
