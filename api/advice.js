@@ -19,10 +19,8 @@ Text k posouzení:
 =====
 ${text}
 =====
-V odpovědi nejprve jednou větou oceň snahu pracovnice při vytváření individuálního plánu. Používej tykání.
-Nepiš žádné doplňující otázky ani doporučení, pokud z textu plyne, že klient zvládá celou oblast hygieny samostatně.
-Nepokládej doplňující otázky týkající se úkonů, u kterých z textu plyne, že je klient/ka zvládá samostatně.
-Zvaž tyto klíčové body - ale jen v případě, že klient s danou činností potřebuje pomoc: 
+V odpovědi nejprve jednou větou oceň snahu pracovnice při vytváření individuálního plánu.
+Zvaž tyto klíčové body: 
 1. Je popsáno, jakou pomoc potřebuje klient při ranní a večerní hygieně (např. při opláchnutí obličeje, čištění zubů, česání)? Je potřebná pomoc popsaná konkrétně?
 2. Je popsáno, jakou pomoc potřebuje klient při celkové hygieně (koupání, sprchování) a s čím konkrétně potřebuje pomoc (např. pomoc při vstupu do sprchy/vany, namydlení těla, opláchnutí, osušení, mytí vlasů)? 
 3. Je popsáno, jestli klient potřebuje pomoc při užívání toalety?
@@ -31,13 +29,16 @@ Zvaž tyto klíčové body - ale jen v případě, že klient s danou činností
 6. Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak riziku předcházet.
 
 Řiď se těmito pravidly:
-Pokud něco důležitého chybí nebo je popis příliš obecný a nekonkrétní, napiš několik otázek, které pomohou text doplnit a upřesnit. Pokládej doplňující otázky JEN u úkonů, kde klient potřebuje pomoc. Ptej se na podrobnosti, jak má pomoc klientovi u jednotlivých úkonů probíhat.
-Když narazíš na slova "dohled", "podpora", "slovní vedení", "slovní podpora" chtěj vědět, co přesně tím pracovnice myslí, jak konkrétně dohled, podpora nebo slovní vedení probíhá.
+Nepokládej žádné doplňující otázky, pokud z textu plyne, že klient/ka zvládá celou oblast hygieny samostatně.
+Nepokládej doplňující otázky týkající se úkonů, u kterých z textu plyne, že je klient/ka zvládá samostatně.
+Pokud něco důležitého chybí nebo je popis příliš obecný, napiš několik otázek, které pomohou text doplnit a upřesnit. Pokládej doplňující otázky JEN u úkonů, kde klient potřebuje pomoc. Ptej se na podrobnosti, jak má pomoc klientovi u jednotlivých úkonů probíhat.
+Když narazíš na slova "dohled", "podpora", "slovní vedení", "slovní podpora", "částečná pomoc" chtěj vědět, co přesně tím pracovnice myslí, jak konkrétně dohled, podpora nebo slovní vedení probíhá.
 Pokud z textu plyne, že klient je zcela závislý na pomoci pracovnic, neptej se, co klient zvládá sám.
 Pokud je v textu k posouzení řeč o klientovi - muži, piš o něm v mužském rodě. Pokud je zmíněna klientka - žena, piš o ní v ženském rodě.
 Piš odpovědi v délce maximálně 1600 znaků. Nakonec textu napiš, že jsi tu ochotně k dispozici pro další rady.
 
 Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
+
 `;
 
 
