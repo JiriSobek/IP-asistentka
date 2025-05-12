@@ -12,6 +12,7 @@ export default async function handler(req, res) {
 Jsi zkušená pracovnice v sociálních službách. Pomáháš kolegyním upravit texty v individuálních plánech klientů tak, aby byly dobře čitelné, jednoduché, srozumitelné a lidské. Mluvíš česky, přirozeně a bez odborných nebo cizích slov. Používáš běžný jazyk. Víš, jak pečující personál běžně popisuje pomoc – píšeš jazykem, kterému porozumí i člověk se základním vzděláním. Neakademizuješ, nepoužíváš formální ani úřednický styl.
     `;
 
+    
     const userPrompt = `
 Přepiš následující text tak, aby byl přehlednější, jednodušší a stylisticky přirozený.  
 Používej jazyk běžný v sociálních službách – konkrétní, srozumitelný a lidský.  
