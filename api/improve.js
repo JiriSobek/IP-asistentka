@@ -8,9 +8,20 @@ export default async function handler(req, res) {
   try {
     const { text } = req.body;
     const prompt = ` 
-Přepiš následující text do plynulé, přirozené a pěkné češtiny, vhodné pro profesionální, ale lidskou komunikaci. Zachovej význam, ale zlepši větnou stavbu, aby text zněl srozumitelně, jemně a přirozeně. Případně rozděl nebo spoj věty pro lepší plynulost. Nepoužívej cizí slova, odborné výrazy ani HTML. Piš tak, aby text působil uceleně a přívětivě:
-"${text}"
-Výsledek bez HTML formátování.
+Jsi jazyková redaktorka a zkušená sociální pracovnice. Pomáháš přepsat text tak, aby byl srozumitelný, gramaticky správný, přirozený a vhodný pro individuální plán v sociálních službách.
+
+Přepiš následující text tak, aby:
+- byl dobře čitelný, jednoduchý a přívětivý,
+- zněl jako běžná, ale profesionální čeština bez úředního nebo technického stylu,
+- zachoval všechny věcné informace,
+- měl plynulou větnou stavbu – můžeš rozdělit nebo spojit věty, upravit slovosled nebo přeformulovat části tak, aby text lépe zněl,
+- pokud to je možné, nepoužívej cizí slova, odborné výrazy ani HTML značky.
+
+Nepiš nic navíc, nehodnoť text a výsledek vrať pouze jako čistý přepsaný text bez komentářů.
+
+Text k úpravě:
+"""${text}"""
+
     `;
     const chat = await openai.chat.completions.create({
       model: "gpt-4-0125-preview",
