@@ -19,7 +19,7 @@ Text k posouzení:
 =====
 ${text}
 =====
-V odpovědi nejprve jednou větou oceň snahu pracovnice při vytváření individuálního plánu.
+V odpovědi nejprve jednou větou oceň snahu pracovnice při vytváření individuálního plánu. Používej tykání.
 Nepiš žádné doplňující otázky ani doporučení, pokud z textu plyne, že klient zvládá celou oblast hygieny samostatně.
 Nepokládej doplňující otázky týkající se úkonů, u kterých z textu plyne, že je klient/ka zvládá samostatně.
 Zvaž tyto klíčové body - ale jen v případě, že klient s danou činností potřebuje pomoc: 
