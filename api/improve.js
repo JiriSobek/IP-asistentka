@@ -24,10 +24,14 @@ Uprav text tak, aby nebyl delší než původní.
 Text:
 """${text}"""
 
-Formátování výstupu:
-1.  Nejprve uveď přepsaný text.
-2.  Poté vlož dva prázdné řádky.
-3.  Následně, v novém odstavci, krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.
+Zde je požadovaný formát výstupu:
+
+[ZDE BUDE PŘEPSANÝ TEXT]
+
+[ZDE JSOU DVA PRÁZDNÉ ŘÁDKY]
+
+[ZDE BUDE TVŮJ KOMENTÁŘ: krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.]
+
     `;
 
     const stream = await openai.beta.chat.completions.stream({
