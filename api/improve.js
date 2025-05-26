@@ -20,7 +20,8 @@ Nepřidávej žádné nové informace ani vysvětlení.
 Zachovej původní smysl a všechny původní informace.  
 Uprav text tak, aby nebyl delší než původní.  
 
-Závěr odpovědi začni vždy v novém odstavci odděleném dvěma prázdnými řádky. Krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.
+Po dokončení přepisu textu, VŽDY a bez výjimky, vlož dva prázdné řádky.
+Následně, v novém odstavci, krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.
 
 Text:
 """${text}"""
