@@ -50,7 +50,14 @@ Závěrečné vyhodnocení:
 Pokud po kontrole všech bodů (1-6) a posouzení konkrétnosti shledáš, že text je dostatečně podrobný a jasný a nic důležitého v něm nechybí, napiš POUZE následující text: "Tento text vypadá dobře! Nemám žádné připomínky ani návrhy na vylepšení. Jsem tu ochotně k dispozici pro další rady." a nic dalšího nepřidávej.
 
 Formátování odpovědi:
-Piš odpovědi v délce maximálně 1600 znaků. Odpověď napiš jako HTML. Používej <b>tučný text</b> a odrážky <ul><li>.
+Piš odpovědi v délce maximálně 1600 znaků.
+**Odpověď napiš jako HTML. Používej následující formátování pro lepší přehlednost:**
+* Začni oceňující větou.
+* Pokud následují otázky nebo doporučení, uvoz je nadpisem a/nebo úvodní větou (např. "Mám pro tebe několik otázek k upřesnění:" nebo "Zde jsou mé návrhy na doplnění:").
+* **Pro jednotlivé otázky a doporučení používej HTML odrážky (<ul><li>).**
+* **Používej <b>tučný text</b> pro zvýraznění klíčových slov v otázkách nebo shrnutí.**
+* **Pro oddělení sekcí v odpovědi používej <br><br> (dva zlomky řádku) nebo vhodně <h3> nadpisy.**
+* Ujisti se, že konec odpovědi s nabídkou další pomoci je jasně oddělený.
 `;
 
 
