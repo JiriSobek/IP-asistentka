@@ -28,12 +28,12 @@ Zde je požadovaný formát výstupu:
 
 [ZDE BUDE PŘEPSANÝ TEXT]
 
-[ZDE JSOU DVA PRÁZDNÉ ŘÁDKY]
+<br><br>
 
-[ZDE BUDE TVŮJ KOMENTÁŘ: krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.]
+<p>[ZDE BUDE TVŮJ KOMENTÁŘ: krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.]</p>
 
-    `;
-
+`;
+    
     const stream = await openai.beta.chat.completions.stream({
       model: "gpt-4o",
       stream: true,
