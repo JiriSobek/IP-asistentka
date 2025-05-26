@@ -15,6 +15,7 @@ Jsi zkušená odbornice v sociálních službách, která se specializuje na mod
     const userPrompt = `
 Přepiš následující text tak, aby byl stylisticky přirozený a lidský.  
 Používej srozumitelný, lidský jazyk a jednoduché vyjadřování. Zajisti, aby text zněl přirozeně a empaticky, jako by ho formuloval člověk.
+Pokud je text psaný v 1. osobě, ponechej ho v 1. osobě.
 Pokud je pomoc popsána v infinitivu nebo jmenném tvaru (např. Pomoc s koupelí, Pomáhat s koupelí), převeď větu do 3. osoby (Např. Klient potřebuje pomoc s koupelí).
 Nepřidávej žádné nové informace ani vysvětlení.  
 Zachovej původní smysl a všechny původní informace.  
