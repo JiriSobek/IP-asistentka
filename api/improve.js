@@ -20,7 +20,7 @@ Nepřidávej žádné nové informace ani vysvětlení.
 Nepoužívej cizí slova, odborné výrazy ani formální styl.  
 Zachovej všechny původní informace.  
 Uprav text tak, aby nebyl delší než původní.  
-V závěru krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni, že je to jen návrh a je na pracovnici, co z navržených změn použije.
+V závěru v novém odstavci krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.
 
 Text:
 """${text}"""
