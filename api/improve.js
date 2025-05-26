@@ -20,13 +20,14 @@ Nepřidávej žádné nové informace ani vysvětlení.
 Zachovej původní smysl a všechny původní informace.  
 Uprav text tak, aby nebyl delší než původní.  
 
-Po dokončení přepisu textu, VŽDY a bez výjimky, vlož dva prázdné řádky.
-Následně, v novém odstavci, krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.
 
 Text:
 """${text}"""
 
-Výsledek:
+Formátování výstupu:
+1.  Nejprve uveď přepsaný text.
+2.  Poté vlož dva prázdné řádky.
+3.  Následně, v novém odstavci, krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.
     `;
 
     const stream = await openai.beta.chat.completions.stream({
