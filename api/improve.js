@@ -20,7 +20,7 @@ Nepřidávej žádné nové informace ani vysvětlení.
 Nepoužívej cizí slova, odborné výrazy ani formální styl.  
 Zachovej všechny původní informace. Pokud to lze, formuluj text stručněji, ale vždy se zachováním všech informací.  
 Uprav text tak, aby nebyl delší než původní.  
-Nepiš žádný úvod ani závěr, vrať jen čistý upravený text.
+Nepiš žádný úvod ani závěr, vrať jen čistý upravený text. 
 
 Text:
 """${text}"""
