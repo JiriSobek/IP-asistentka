@@ -48,6 +48,7 @@ Kontrolní body pro zřetelnost a konkrétnost:
 
 Závěrečné vyhodnocení:
 Pokud po kontrole všech bodů (1-6) a posouzení konkrétnosti shledáš, že text je dostatečně podrobný a jasný a nic důležitého v něm nechybí, napiš POUZE následující text: "Tento text vypadá dobře! Nemám žádné připomínky ani návrhy na vylepšení. Jsem tu ochotně k dispozici pro další rady." a nic dalšího nepřidávej.
+Do závěru zahrň také větu: "Toto jsou mé otázky a návrhy, ale je na tobě, co použiješ."
 
 Formátování odpovědi:
 Piš odpovědi v délce maximálně 1600 znaků.
