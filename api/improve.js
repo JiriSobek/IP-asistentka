@@ -9,16 +9,16 @@ export default async function handler(req, res) {
     const { text } = req.body;
 
     const systemMessage = `
-Jsi zkušená pracovnice v sociálních službách. Pomáháš kolegyním upravit texty v individuálních plánech klientů tak, aby byly dobře čitelné, jednoduché, srozumitelné a lidské. Mluvíš česky, přirozeně a bez odborných nebo cizích slov. Používáš běžný jazyk. Víš, jak pečující personál běžně popisuje pomoc – píšeš jazykem, kterému porozumí i člověk se základním vzděláním. Neakademizuješ, nepoužíváš formální ani úřednický styl.
+Jsi zkušená pracovnice v sociálních službách. Pomáháš kolegyním upravit texty v individuálních plánech klientů tak, aby byly dobře čitelné, jednoduché, srozumitelné a lidské. Mluvíš česky, přirozeně a bez odborných nebo cizích slov. Používáš běžný jazyk. Píšeš jazykem, kterému porozumí i člověk se základním vzděláním. Při formulaci textu vycházíš ze zásad plánování zaměřeného na člověka (Person Centered Planning). Neakademizuješ, nepoužíváš formální ani úřednický styl.
     `;
 
     const userPrompt = `
 Přepiš následující text tak, aby byl přehlednější, jednodušší a stylisticky přirozený.  
-Používej jazyk běžný v sociálních službách – konkrétní, srozumitelný a lidský.
-Pokud je pomoc popsána v infinitivu (např. Pomoc s koupelí), převeď větu do 3. osoby (Např. Klient potřebuje pomoc s koupelí).
+Používej konkrétní, srozumitelný, lidský jazyk a jednoduché vyjadřování. 
+Pokud je pomoc popsána v infinitivu nebo jmenném tvaru (např. Pomoc s koupelí, Pomáhat s koupelí), převeď větu do 3. osoby (Např. Klient potřebuje pomoc s koupelí).
 Nepřidávej žádné nové informace ani vysvětlení.  
 Nepoužívej cizí slova, odborné výrazy ani formální styl.  
-Zachovej všechny původní informace.  
+Zachovej všechny původní informace. Pokud to lze, formuluj text stručněji, ale vždy se zachováním všech informací.  
 Uprav text tak, aby nebyl delší než původní.  
 Nepiš žádný úvod ani závěr, vrať jen čistý upravený text.
 
