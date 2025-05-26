@@ -24,13 +24,17 @@ Uprav text tak, aby nebyl delší než původní.
 Text:
 """${text}"""
 
-Zde je požadovaný formát výstupu:
+Zde je požadovaný formát výstupu (včetně komentáře):
 
 [ZDE BUDE PŘEPSANÝ TEXT]
 
 <br><br>
 
-<p>[ZDE BUDE TVŮJ KOMENTÁŘ: krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.]</p>
+[ZDE BUDE TVŮJ KOMENTÁŘ, KTERÝ SE PŘIZPŮSOBÍ ROZSAHU ZMĚN:
+- Pokud byly úpravy minimální a text byl již původně dobrý, uveď něco jako: "Původní text je velmi dobrý, provedla jsem jen drobné úpravy pro ještě lepší plynulost a srozumitelnost."
+- Pokud byly úpravy rozsáhlejší, uveď obecnější komentář, jako např.: "Text jsem upravila tak, aby zněl přirozeněji a lidštěji, což může usnadnit pochopení."
+Vždy ale na konci komentáře zdůrazni: "Je to jen návrh a je na tobě, co z navržených změn použiješ."
+]
 
 `;
     
