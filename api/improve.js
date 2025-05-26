@@ -18,9 +18,9 @@ Používej konkrétní, srozumitelný, lidský jazyk a jednoduché vyjadřován�
 Pokud je pomoc popsána v infinitivu nebo jmenném tvaru (např. Pomoc s koupelí, Pomáhat s koupelí), převeď větu do 3. osoby (Např. Klient potřebuje pomoc s koupelí).
 Nepřidávej žádné nové informace ani vysvětlení.  
 Nepoužívej cizí slova, odborné výrazy ani formální styl.  
-Zachovej všechny původní informace. Pokud to lze, formuluj text stručněji, ale vždy se zachováním všech informací.  
+Zachovej všechny původní informace.  
 Uprav text tak, aby nebyl delší než původní.  
-Nepiš žádný úvod ani závěr, vrať jen čistý upravený text.
+V závěru krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni, že je to jen návrh a je na pracovnici, co z navržených změn použije.
 
 Text:
 """${text}"""
