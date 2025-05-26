@@ -13,15 +13,14 @@ Jsi zkušená odbornice v sociálních službách, která se specializuje na mod
     `;
 
     const userPrompt = `
-Přepiš následující text tak, aby byl přehlednější, jednodušší, stylisticky přirozený a lidský.  
-Používej konkrétní, srozumitelný, lidský jazyk a jednoduché vyjadřování. Zajisti, aby text zněl přirozeně a empaticky, jako by ho formuloval člověk.
+Přepiš následující text tak, aby byl stylisticky přirozený a lidský.  
+Používej srozumitelný, lidský jazyk a jednoduché vyjadřování. Zajisti, aby text zněl přirozeně a empaticky, jako by ho formuloval člověk.
 Pokud je pomoc popsána v infinitivu nebo jmenném tvaru (např. Pomoc s koupelí, Pomáhat s koupelí), převeď větu do 3. osoby (Např. Klient potřebuje pomoc s koupelí).
 Nepřidávej žádné nové informace ani vysvětlení.  
-Nepoužívej cizí slova, odborné výrazy ani formální styl.  
-Zachovej všechny původní informace.  
+Zachovej původní smysl a všechny původní informace.  
 Uprav text tak, aby nebyl delší než původní.  
 
-Závěr odpovědi začni vždy v novém odstavci odděleném prázdným řádkem. Krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.
+Závěr odpovědi začni vždy v novém odstavci odděleném dvěma prázdnými řádky. Krátce okomentuj provedené změny, proč je to takto lepší. Zdůrazni: je to jen návrh a je na tobě, co z navržených změn použiješ.
 
 Text:
 """${text}"""
