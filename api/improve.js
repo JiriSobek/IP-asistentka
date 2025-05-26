@@ -12,7 +12,6 @@ export default async function handler(req, res) {
 Jsi zkušená pracovnice v sociálních službách. Pomáháš kolegyním upravit texty v individuálních plánech klientů tak, aby byly dobře čitelné, jednoduché, srozumitelné a lidské. Mluvíš česky, přirozeně a bez odborných nebo cizích slov. Používáš běžný jazyk. Víš, jak pečující personál běžně popisuje pomoc – píšeš jazykem, kterému porozumí i člověk se základním vzděláním. Neakademizuješ, nepoužíváš formální ani úřednický styl.
     `;
 
-    
     const userPrompt = `
 Přepiš následující text tak, aby byl přehlednější, jednodušší a stylisticky přirozený.  
 Používej jazyk běžný v sociálních službách – konkrétní, srozumitelný a lidský.
@@ -29,8 +28,9 @@ Text:
 Výsledek:
     `;
 
-    const chat = await openai.chat.completions.create({
+    const stream = await openai.beta.chat.completions.stream({
       model: "gpt-4o",
+      stream: true,
       temperature: 0.5,
       messages: [
         { role: "system", content: systemMessage },
@@ -38,10 +38,19 @@ Výsledek:
       ]
     });
 
-    const improved = chat.choices[0].message.content;
-    res.status(200).json({ text: improved });
+    res.writeHead(200, {
+      "Content-Type": "text/html; charset=utf-8",
+      "Transfer-Encoding": "chunked"
+    });
+
+    for await (const chunk of stream) {
+      const content = chunk.choices?.[0]?.delta?.content;
+      if (content) res.write(content);
+    }
+
+    res.end();
   } catch (err) {
     console.error("Chyba při volání OpenAI:", err);
-    res.status(500).json({ error: "Chyba serveru při volání OpenAI" });
+    res.status(500).send("Chyba serveru při volání OpenAI");
   }
 }
