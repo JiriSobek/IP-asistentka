@@ -32,8 +32,8 @@ Zde je požadovaný formát výstupu (včetně komentáře):
 
 [ZDE BUDE TVŮJ KOMENTÁŘ:
 Zvol vhodný tón a obsah komentáře na základě rozsahu a povahy provedených změn:
-- Pokud byly provedeny spíše drobné úpravy (např. interpunkce, drobné přeformulování slov či vět a text už byl původně kvalitní), uveď že původní text bylo dobrý a navržené změny jen malé.
-- Pokud byly provedeny výraznější úpravy (např. výrazné zjednodušení složitých vět, sjednocení stylu, odstranění žargonu, změna větné struktury), popiš konkrétně, proč je přepsaný text lepší. Zaměř se na to, jak zní přirozeněji, lidštěji a je srozumitelnější.
+- Pokud byly provedeny spíše drobné úpravy bez velkých zásahů do textu, uveď že původní text bylo dobrý a navržené změny jen malé.
+- Pokud byly provedeny výraznější úpravy a zásahy do textu, popiš konkrétně, proč je přepsaný text lepší. Zaměř se na to, jak zní přirozeněji a je srozumitelnější.
 Vždy ale na konci komentáře zdůrazni: Je to jen návrh a je na tobě, co z navržených změn použiješ.
 ]
 
