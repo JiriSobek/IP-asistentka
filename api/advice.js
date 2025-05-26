@@ -32,7 +32,7 @@ Zkontroluj, zda je z textu zřejmé:
 6. Hrozí při hygieně nějaké riziko? Pokud ano, musí být popsáno, jak riziku předcházet.
 
 Řiď se těmito pravidly:
-Pokud něco důležitého chybí nebo je popis příliš obecný a nekonkrétní, napiš několik otázek, které pomohou text doplnit a upřesnit. Ptej se na podrobnosti, jak má pomoc klientovi u jednotlivých úkonů probíhat. Pokládej otázky JEN u úkonů, kde klient potřebuje pomoc. Když z textu plyne, že klient pomoc nepotřebuje, otázky nepokládej.
+Pokud něco důležitého chybí nebo je popis příliš obecný a nekonkrétní, napiš několik otázek, které pomohou text doplnit a upřesnit. Ptej se na podrobnosti, JAK má pomoc klientovi u jednotlivých úkonů probíhat. Neptej se kdo pomoc zajišťuje. Pokládej otázky JEN u úkonů, kde klient potřebuje pomoc. Když z textu plyne, že klient pomoc nepotřebuje, otázky nepokládej.
 Když narazíš na slova "dohled", "podpora", "slovní vedení", "slovní podpora" chtěj vědět, co přesně tím pracovnice myslí, jak konkrétně dohled, podpora nebo slovní vedení probíhá.
 Pokud z textu plyne, že klient je zcela závislý na pomoci pracovnic, neptej se, co klient zvládá sám.
 Pokud je v textu k posouzení řeč o klientovi - muži, piš o něm v mužském rodě. Pokud je zmíněna klientka - žena, piš o ní v ženském rodě.
