@@ -30,10 +30,11 @@ Zde je požadovaný formát výstupu (včetně komentáře):
 
 <br><br>
 
-[ZDE BUDE TVŮJ KOMENTÁŘ, KTERÝ SE PŘIZPŮSOBÍ ROZSAHU ZMĚN:
-- Pokud byly úpravy minimální a text byl již původně dobrý, uveď něco jako: "Původní text je velmi dobrý, provedla jsem jen drobné úpravy pro ještě lepší plynulost a srozumitelnost."
-- Pokud byly úpravy rozsáhlejší, uveď obecnější komentář, jako např.: "Text jsem upravila tak, aby zněl přirozeněji a lidštěji, což může usnadnit pochopení."
-Vždy ale na konci komentáře zdůrazni: "Je to jen návrh a je na tobě, co z navržených změn použiješ."
+[ZDE BUDE TVŮJ KOMENTÁŘ:
+Zvol vhodný tón a obsah komentáře na základě rozsahu a povahy provedených změn:
+- Pokud byly provedeny spíše drobné úpravy (např. interpunkce, drobné přeformulování slov či vět a text už byl původně kvalitní), uveď že původní text bylo dobrý a navržené změny jen malé.
+- Pokud byly provedeny výraznější úpravy (např. výrazné zjednodušení složitých vět, sjednocení stylu, odstranění žargonu, změna větné struktury), popiš konkrétně, proč je přepsaný text lepší. Zaměř se na to, jak zní přirozeněji, lidštěji a je srozumitelnější.
+Vždy ale na konci komentáře zdůrazni: Je to jen návrh a je na tobě, co z navržených změn použiješ.
 ]
 
 `;
